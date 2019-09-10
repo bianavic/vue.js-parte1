@@ -3,7 +3,7 @@
 
     <h1 class="centralizado">{{ titulo }}</h1>
 
-    <input type="search" class="filtro" v-on:input="filtro = $event.target.value" placeholder="filtre pelo título da foto">
+    <input type="search" class="filtro" @input="filtro = $event.target.value" placeholder="filtre pelo título da foto">
 {{ filtro }}
     <ul class="lista-fotos">
       <li class="lista-fotos-item" v-for="foto of fotosComFiltro">
@@ -37,6 +37,7 @@ export default {
   },
 
   computed: {
+
     fotosComFiltro() {
 
       if (this.filtro) {
@@ -62,7 +63,7 @@ export default {
 
 <style>
 
-  .titulo {
+  .centralizado {
     text-align: center;
   }
 
@@ -87,4 +88,5 @@ export default {
     display: block;
     width: 100%;
   }
+
 </style>
