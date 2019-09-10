@@ -5,9 +5,7 @@
 
     <ul>
 
-      <li v-for="foto of fotos">
-     <img :src="foto.url" :alt="foto.titulo">
-      </li>
+     <img v-for="foto in fotos" :src="foto.url" :alt="foto.titulo">
 
     </ul>
 
@@ -19,8 +17,12 @@ export default {
   name: 'app',
   data () {
     return {
-      titulo: 'Bem vindes ao meu primeiro Vue.js App'
+      titulo: 'Bem vindes ao meu primeiro Vue.js App', 
+      fotos: []
     }
+  },
+  created () {
+        alert('Funcionou!');
   }
 }
 </script>
