@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .painel {
     padding: 0 auto;
     border: solid 2px grey;
@@ -38,4 +38,9 @@ export default {
     padding: 10px;
     text-transform: uppercase;
   }
+
+* {
+    box-shadow: 5px 5px 5px;
+  }
+
 </style>
