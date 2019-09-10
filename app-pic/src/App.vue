@@ -8,7 +8,7 @@
     <ul class="lista-fotos">
       <li class="lista-fotos-item" v-for="foto of fotosComFiltro">
         <meu-painel :titulo="foto.titulo">
-          <img class="imagem-responsiva" :src="foto.url" :alt="foto.titulo">
+          <img class="imagem-responsiva" :url="foto.url" :titulo="foto.titulo">
         </meu-painel>
         </li>
     </ul>
@@ -22,19 +22,15 @@ import ImagemResponsiva from './components/shared/imagem-responsiva/ImagemRespon
 
 export default {
 
-export default {
-
   components: {
-
-    'meu-painel': Painel
+    'meu-painel': Painel,
+    'imagem-responsiva': ImagemResponsiva
   },
 
   data () {
     return {
       titulo: 'App Pic', 
-
       fotos: [],
-
       filtro: ''
     }
   },
@@ -44,9 +40,7 @@ export default {
     fotosComFiltro() {
 
       if (this.filtro) {
-        // criando uma expressão com o valor do filtro, insensitivo
         let exp = new RegExp(this.filtro.trim(), 'i');
-        // retorna apenas as fotos que condizem com a expressão
         return this.fotos.filter(foto => exp.test(foto.titulo));
       } else {
         return this.fotos;
