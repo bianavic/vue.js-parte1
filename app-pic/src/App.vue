@@ -4,7 +4,7 @@
     <h1 class="centralizado">{{ titulo }}</h1>
 
     <input type="search" class="filtro" @input="filtro = $event.target.value" placeholder="filtre pelo título da foto">
-{{ filtro }}
+
     <ul class="lista-fotos">
       <li class="lista-fotos-item" v-for="foto of fotosComFiltro">
         <meu-painel :titulo="foto.titulo">
@@ -18,6 +18,9 @@
 
 <script>
 import Painel from './components/shared/painel/Painel.vue'
+import ImagemResponsiva from './components/shared/imagem-responsiva/ImagemResponsiva.vue'
+
+export default {
 
 export default {
 
@@ -81,9 +84,6 @@ export default {
     display: inline-block;
   }
 
-  .imagem-responsiva {
-    width: 100%;
-  }
   .filtro {
     display: block;
     width: 100%;
