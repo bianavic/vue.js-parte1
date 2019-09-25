@@ -1,8 +1,13 @@
 <template>
   <div class="corpo">
 
-   <nav>
-      <ul>       
+    <h1 class="centralizado">{{ titulo }}
+
+       <img v-for="foto in fotos" :src="foto.url" :alt="foto.titulo">
+
+      <input type="search" class="filtro" placeholder="filtre pelo titulo da foto">
+
+      <ul class="lista-fotos">       
           <li v-for="route in routes">
             <router-link :to="route.path ? route.path : '/'">{{route.titulo}}</router-link>
           </li>
@@ -29,8 +34,16 @@ export default {
 
   data() {
     return {
-      routes
+      routes,
+      titulo: "Alura",
+      fotos: []
+
     }
+  },
+  created() {
+
+    alert('funcionou')
+
   }
 }
 </script>
