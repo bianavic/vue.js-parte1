@@ -7,6 +7,7 @@ import VueRouter from 'vue-router';
 // tem que vir entre chaves, porque não é default
 import { routes } from './routes';
 
+// registrando o módulo/plugin no global view object
 Vue.use(VueRouter);
 
 const router = new VueRouter({
