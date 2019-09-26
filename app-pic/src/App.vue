@@ -1,54 +1,59 @@
 <template>
   <div class="corpo">
 
-    <h1 class="centralizado">{{ titulo }}
+    <h1 class="centralizado">{{ titulo }}></h1>
 
-       <img v-for="foto in fotos" :src="foto.url" :alt="foto.titulo">
+       <ul class="lista-fotos">
 
-      <input type="search" class="filtro" placeholder="filtre pelo titulo da foto">
+      <li class="lista-fotos-item" v-for="foto of fotos">
 
-      <ul class="lista-fotos">       
-          <li v-for="route in routes">
-            <router-link :to="route.path ? route.path : '/'">{{route.titulo}}</router-link>
-          </li>
-      </ul>
-    </nav>
+          <meu-painel :titulo="foto.titulo">
+          <img class="imagem-responsiva" :src="foto.url" :alt="foto.titulo">
+        </meu-painel>
 
-    <transition name="pagina">
-    <router-view></router-view>
-    </transition>
-
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
 
+import Painel from './components/shared/painel/Painel.vue'
+
 import { routes } from './routes';
 import Menu from './components/shared/menu/Menu'
+import func from '../vue-temp/vue-editor-bridge';
 
 export default {
 
   components: {
-    'meu-menu' : Menu
+    'meu-painel' : Painel
   },
 
   data() {
     return {
-      routes,
       titulo: "Alura",
       fotos: []
 
     }
   },
+
   created() {
 
-    alert('funcionou')
-
-  }
+    this.$http
+    .get('http://localhost:8080/v1/fotos') 
+    .then(res => res.json())
+      .then(fotos => this.fotos = fotos, err => console.log(err));
+    }
 }
+
 </script>
 
 <style>
+
+.centralizado {
+    text-align: center;
+  }
 
   .corpo {
     font-family: Helvetica, sans-serif;
@@ -56,11 +61,39 @@ export default {
     width: 96%;
   }
 
-  .pagina-enter-active, .pagina-leave-active {
-    transition: opacity .3s
+.lista-fotos {
+    list-style: none;
   }
-  .pagina-enter, .pagina-leave-active {
-    opacity: 0
+
+  .lista-fotos .lista-fotos-item {
+    display: inline-block;
+  }
+
+  .imagem-responsiva {
+    width: 100%;
+  }
+
+  /* estilo do painel */ 
+
+   .painel {
+    padding: 0 auto;
+    border: solid 2px grey;
+    display: inline-block;
+    margin: 5px;
+    box-shadow: 5px 5px 10px grey;
+    width: 200px;
+    height: 100%;
+    vertical-align: top;
+    text-align: center;
+  }
+
+  .painel .painel-titulo {
+    text-align: center;
+    border: solid 2px;
+    background: lightblue;
+    margin: 0 0 15px 0;
+    padding: 10px;
+    text-transform: uppercase;
   }
 
 </style>
